@@ -1,33 +1,33 @@
-#install python en pip
-ARG BUILD_FROM
-ARG BUILD_VERSION
-FROM $BUILD_FROM
+FROM python:3.12.4-alpine3.20
 
 # Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get dist-upgrade -y
-RUN apt-get install -y python3
-RUN apt-get install -y python3-pip
-RUN apt-get install -y python3.11-venv
+# RUN apt-get update
+# RUN apt-get upgrade -y
+# RUN apt-get dist-upgrade -y
+# RUN apt-get install -y python3
+# RUN apt-get install -y python3-pip
+# RUN apt-get install -y python3-venv
+# RUN apt-get install -y python3-requests
+# RUN apt-get install -y python3-yaml
+# #RUN apt-get install -y python3-asyncio
+# RUN apt-get install -y python3-aiohttp
+# RUN apt-get install csh
+# RUN apt-get install -y python3-tz
 
-WORKDIR /app_data
-COPY rootfs /
+RUN apk update && \
+    apk upgrade && \
+    apk add tcsh
+
+WORKDIR /config
+COPY rootfs /config
 
 COPY requirements.txt /tmp/
-RUN pip install -r /tmp/requirements.txt
+RUN pip3 install --no-cache-dir -r -r /tmp/requirements.txt
 
 # Start app
-RUN chmod a+x /run.sh
-
-#ENV VIRTUAL_ENV=/root/venv/day_ahead
-#RUN python3 -m venv $VIRTUAL_ENV
-#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-#COPY requirements.txt /tmp/
-#RUN pip3 install -r /tmp/requirements.txt
+RUN chmod a+x run.csh
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
@@ -55,5 +55,4 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-# CMD ["python3", "/startup.py"]
-#CMD [ "/run.sh" ]
+CMD [ "csh", "-f", "run.csh"]
