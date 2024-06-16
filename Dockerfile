@@ -18,7 +18,7 @@ FROM python:3.12.4-alpine3.20
 
 RUN apk update && \
     apk upgrade && \
-    apk add tcsh gcc
+    apk add tcsh gcc musl-dev
 
 WORKDIR /config
 COPY predbat/rootfs /config
