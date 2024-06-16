@@ -24,7 +24,7 @@ WORKDIR /config
 COPY predbat/rootfs /config
 
 COPY predbat/requirements.txt /tmp/
-RUN pip3 install --no-cache-dir -r -r /tmp/requirements.txt
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 # Start app
 RUN chmod a+x run.csh
