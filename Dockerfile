@@ -18,7 +18,7 @@ RUN apt-get install csh
 RUN apt-get install -y python3-tz
 
 WORKDIR /config
-COPY rootfs /config
+COPY predbat/rootfs /config
 
 #COPY requirements.txt /tmp/
 #RUN pip3 install -r /tmp/requirements.txt
