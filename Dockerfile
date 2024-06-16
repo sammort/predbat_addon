@@ -1,30 +1,27 @@
-FROM python:3.12.4-alpine3.20
+#install python en pip
+FROM ubuntu:noble
 
 # Set shell
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# RUN apt-get update
-# RUN apt-get upgrade -y
-# RUN apt-get dist-upgrade -y
-# RUN apt-get install -y python3
-# RUN apt-get install -y python3-pip
-# RUN apt-get install -y python3-venv
-# RUN apt-get install -y python3-requests
-# RUN apt-get install -y python3-yaml
-# #RUN apt-get install -y python3-asyncio
-# RUN apt-get install -y python3-aiohttp
-# RUN apt-get install csh
-# RUN apt-get install -y python3-tz
-
-RUN apk update && \
-    apk upgrade && \
-    apk add tcsh gcc musl-dev
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get dist-upgrade -y
+RUN apt-get install -y python3
+RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-venv
+RUN apt-get install -y python3-requests
+RUN apt-get install -y python3-yaml
+#RUN apt-get install -y python3-asyncio
+RUN apt-get install -y python3-aiohttp
+RUN apt-get install csh
+RUN apt-get install -y python3-tz
 
 WORKDIR /config
-COPY predbat/rootfs /config
+COPY rootfs /config
 
-COPY predbat/requirements.txt /tmp/
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+#COPY requirements.txt /tmp/
+#RUN pip3 install -r /tmp/requirements.txt
 
 # Start app
 RUN chmod a+x run.csh
