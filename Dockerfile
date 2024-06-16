@@ -21,9 +21,9 @@ RUN apk update && \
     apk add tcsh
 
 WORKDIR /config
-COPY rootfs /config
+COPY predbat/rootfs /config
 
-COPY requirements.txt /tmp/
+COPY predbat/requirements.txt /tmp/
 RUN pip3 install --no-cache-dir -r -r /tmp/requirements.txt
 
 # Start app
