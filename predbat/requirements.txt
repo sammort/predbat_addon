@@ -2,4 +2,8 @@ pytz
 requests
 pyyaml
 asyncio
-aiohttp>=3.8.6
+aiohttp
+Jinja2
+ruamel.yaml
+mcp
+pyjwt
