@@ -1,9 +1,8 @@
 pytz
 requests
 pyyaml
-asyncio
 aiohttp
 Jinja2
-ruamel.yaml
-mcp
+ruamel.yaml==0.18.17
 pyjwt
+numpy==2.3.5
